@@ -1,0 +1,266 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="webAdmin_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>DASHMIN - Bootstrap Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript" src="../webAdmin/js/snowfall.js"></script>
+    <script type="text/javascript" src="../webAdmin/js/Gift.js"></script>
+    <style>
+        .hover-underline:hover {
+            text-decoration: underline;
+        }
+
+        .headertext {
+            padding-left: 55px;
+        }
+
+        @keyframes moveHorizontally {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(1825%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .moving-image {
+            animation: moveHorizontally 10s linear infinite;
+        }
+
+        body {
+            margin: 0;
+            /* Set a background color for the page */
+        }
+
+        .snowflake {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            background-image: url("../Images/christmas0682.PNG"); /* Replace with the path to your custom image */
+            background-size: cover;
+            animation: falling linear infinite;
+        }
+
+        .snowGift {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            pointer-events: none;
+            background-image: url("../Images/Christmas_Present79.PNG"); /* Replace with the path to your custom image */
+            background-size: cover;
+            animation: falling linear infinite;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(-400vh);
+            }
+
+            100% {
+                transform: translateY(00vh);
+            }
+        }
+
+        .falling-gift {
+            position: fixed;
+            animation: fallDown 2s linear;
+        }
+
+        @keyframes fallDown {
+            0% {
+                transform: translateY(-5vh);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <asp:Panel ID="pnlMaster" runat="server">
+        <form id="form1" runat="server">
+
+
+            <div class="container-xxl position-relative bg-white d-flex p-0" style="max-width: 100%">
+                <!-- Spinner Start -->
+                <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <!-- Spinner End -->
+
+
+                <!-- Sidebar Start -->
+                <div class="sidebar pe-4 pb-3">
+                    <nav class="navbar bg-light navbar-light">
+                        <a href="#" class="navbar-brand mx-4 mb-3">
+                            <h3 class="text-primary">
+                                <%-- <img src="../Images/pikarun.gif" style="width: 42px; height: 35px" />--%><asp:Image runat="server" ImageUrl="~/Images/bug-trackerr-cap.png" Width="200px" />
+                                <%-- Bug Tracker--%></h3>
+                        </a>
+                        <div class="d-flex align-items-center ms-4 mb-4">
+                            <div class="position-relative">
+                                <asp:Image ID="imgUser2" runat="server" CssClass="rounded-circle" Style="width: 40px; height: 40px;" />
+                                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                            </div>
+                            <div class="ms-3">
+                                <h5>
+                                    <asp:Label ID="lbUserName2" runat="server" CssClass="d-none d-lg-inline-flex" Font-Bold="true"></asp:Label></h5>
+                                <span>
+                                    <asp:Label ID="lbUserRole" runat="server" CssClass="mb-0" Font-Italic="true"></asp:Label></span>
+
+                            </div>
+                        </div>
+                        <asp:Panel ID="pnlIfAdminInUsersDirectory" runat="server" Visible="false">
+                            <div class="navbar-nav w-100">
+                                <a href="../webUsers/dashboard.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                                <a href="../webUsers/SearchIssues.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>View Issues</a>
+                                <a href="../webUsers/addIssue.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Report Issue</a>
+                                <a href="../webAdmin/project_management.aspx" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Projects</a>
+                                <a href="../webAdmin/manage_user.aspx" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Manage Users</a>
+                                <a href="../webAdmin/manage_category.aspx" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Categories</a>
+                                <a href="../webAdmin/manage_tags.aspx" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Manage Tags</a>
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel ID="pnlIfAdminInOwnDirectory" runat="server" Visible="true">
+                            <div class="navbar-nav w-100">
+                                <a href="../webUsers/dashboard.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                                <a href="../webUsers/SearchIssues.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>View Issues</a>
+                                <a href="../webUsers/addIssue.aspx" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Report Issue</a>
+                                <a href="../webAdmin/project_management.aspx" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Projects</a>
+                                <a href="../webAdmin/manage_user.aspx" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Manage Users</a>
+                                <a href="../webAdmin/manage_category.aspx" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Categories</a>
+                                <a href="../webAdmin/manage_tags.aspx" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Manage Tags</a>
+                            </div>
+                        </asp:Panel>
+
+                    </nav>
+                </div>
+                <!-- Sidebar End -->
+
+
+                <!-- Content Start -->
+                <div class="content">
+                    <!-- Navbar Start -->
+                    <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                        <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                            <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                        </a>
+                        <a href="#" class="sidebar-toggler flex-shrink-0">
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                        <!-- Add the moving image with the new class -->
+                        <img id="padoruImage" src="../Images/Padoru_3D.GIF" alt="Moving Image" class="moving-image" width="48px" height="48px" onclick="dropGift()"/>
+                        <%--<img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <h3 class="text-danger" style="margin-left:25px;margin-top:10px">Merry Christmas</h3>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>
+                        <img src="../Images/achristmastree92.GIF" alt="Moving Image" width="48px" height="48px" style="margin-left:25px"/>--%>
+
+                        <div class="navbar-nav align-items-center ms-auto">
+                            <asp:DropDownList ID="ddlProjectSelect" runat="server" CssClass="form-select form-select" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="ddlProjectSelect_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <asp:Image ID="imgUser" runat="server" CssClass="rounded-circle me-lg-2" Style="width: 40px; height: 40px;" />
+                                    <asp:Label ID="lbUserName" runat="server" CssClass="d-none d-lg-inline-flex"></asp:Label>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                    <asp:HyperLink ID="profileLink" runat="server" CssClass="dropdown-item">My Profile</asp:HyperLink>
+                                    <asp:HyperLink ID="logoutLink" runat="server" CssClass="dropdown-item">Log Out</asp:HyperLink>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- Navbar End -->
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <!-- Footer Start -->
+                    <div class="container-fluid pt-4 px-4">
+                        <div class="bg-light rounded-top p-4">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 text-center text-sm-start" style="margin-left: 220px">
+                                    &copy; <a href="#">mantisnoobtracker.com</a>, All Right Reserved. 
+                                </div>
+                                <%--<div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </br>
+                        Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        </div>--%>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer End -->
+
+                </div>
+                <!-- Content End -->
+
+
+                <!-- Back to Top -->
+                <%--<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>--%>
+            </div>
+
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/chart/chart.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
+
+
+        </form>
+    </asp:Panel>
+
+</body>
+</html>
